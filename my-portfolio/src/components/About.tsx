@@ -1,7 +1,7 @@
 'use client';
 
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiJavascript, SiHtml5, SiCss3, SiGit, SiGithub, SiAmazon, SiHackerrank } from 'react-icons/si';
-import { FaShieldAlt } from 'react-icons/fa';
+import { FaShieldAlt, FaGraduationCap, FaCode, FaPalette, FaProjectDiagram } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const skills = [
@@ -15,6 +15,27 @@ const skills = [
   { name: 'CSS3', icon: SiCss3, color: 'text-blue-500' },
   { name: 'Git', icon: SiGit, color: 'text-orange-600' },
   { name: 'GitHub', icon: SiGithub, color: 'text-black dark:text-white' },
+];
+
+const experience = [
+  {
+    name: 'Web Development',
+    icon: FaCode,
+    color: 'text-blue-500',
+    description: 'Full-stack development with modern technologies'
+  },
+  {
+    name: 'UI/UX Design',
+    icon: FaPalette,
+    color: 'text-purple-500',
+    description: 'Creating intuitive and beautiful user interfaces'
+  },
+  {
+    name: 'Project Management',
+    icon: FaProjectDiagram,
+    color: 'text-green-500',
+    description: 'Leading and managing development projects'
+  }
 ];
 
 const certifications = [
@@ -38,6 +59,23 @@ const certifications = [
     icon: SiHackerrank,
     color: 'text-green-600',
     date: '2023'
+  }
+];
+
+const currentLearning = [
+  {
+    name: 'Machine Learning Specialization',
+    issuer: 'Stanford Online',
+    icon: FaGraduationCap,
+    color: 'text-purple-500',
+    progress: 'In Progress'
+  },
+  {
+    name: 'Advanced System Design',
+    issuer: 'Educative.io',
+    icon: FaGraduationCap,
+    color: 'text-blue-500',
+    progress: 'Starting Soon'
   }
 ];
 
@@ -123,27 +161,39 @@ export default function About() {
           >
             Experience
           </motion.h3>
-          <motion.ul 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-3"
+            className="grid grid-cols-1 gap-4"
           >
-            {['Web Development', 'UI/UX Design', 'Project Management'].map((item, index) => (
-              <motion.li
-                key={item}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex items-center gap-2 text-gray-600 dark:text-gray-300"
-              >
-                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                {item}
-              </motion.li>
-            ))}
-          </motion.ul>
+            {experience.map((exp) => {
+              const Icon = exp.icon;
+              return (
+                <motion.div
+                  key={exp.name}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  className="group p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2 rounded-full ${exp.color} bg-opacity-10 group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon size={20} color={exp.color} />
+                    </div>
+                    <div>
+                      <h4 className="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {exp.name}
+                      </h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {exp.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
       
@@ -180,8 +230,8 @@ export default function About() {
                 className="group p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className={`${cert.color} group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon size={28} />
+                  <div>
+                    <Icon size={28} color={cert.color} />
                   </div>
                   <div>
                     <h4 className="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -192,6 +242,64 @@ export default function About() {
                 </div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">
                   Issued: {cert.date}
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </motion.div>
+
+      {/* Currently Learning Section */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mt-12"
+      >
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="text-blue-500">
+            <FaGraduationCap size={24} />
+          </div>
+          <motion.h3 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-xl font-semibold text-center"
+          >
+            Currently Learning
+          </motion.h3>
+        </div>
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+        >
+          {currentLearning.map((cert) => {
+            const Icon = cert.icon;
+            return (
+              <motion.div
+                key={cert.name}
+                variants={itemVariants}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="group p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 dark:border-blue-900"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div>
+                    <Icon size={28} color={cert.color} />
+                  </div>
+                  <div>
+                    <h4 className="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {cert.name}
+                    </h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{cert.issuer}</p>
+                  </div>
+                </div>
+                <div className="text-sm text-blue-600 dark:text-blue-400">
+                  {cert.progress}
                 </div>
               </motion.div>
             );

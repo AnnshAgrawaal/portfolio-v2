@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Github, ExternalLink, Code, Gamepad2, BookOpen, Camera, Music, Coffee } from 'lucide-react';
+import { Github, ExternalLink, Code, Gamepad2, BookOpen, Camera, Music, Coffee, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -38,6 +38,21 @@ const projects = [
     tech: ['React Native', 'Firebase', 'Redux'],
     github: 'https://github.com/yourname/fitness-tracker',
     demo: 'https://fitness-tracker.vercel.app',
+  }
+];
+
+const currentProjects = [
+  {
+    title: 'AI-Powered Code Assistant',
+    description: 'Building an intelligent code assistant that helps developers write better code.',
+    tech: ['Python', 'OpenAI', 'FastAPI'],
+    status: 'In Progress'
+  },
+  {
+    title: 'Real-time Collaboration Tool',
+    description: 'Developing a real-time collaboration platform for remote teams.',
+    tech: ['WebSocket', 'React', 'Node.js'],
+    status: 'Planning Phase'
   }
 ];
 
@@ -98,6 +113,57 @@ export default function Projects() {
       >
         My Projects
       </motion.h2>
+
+      {/* Currently Working On Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mb-12"
+      >
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <Clock className="text-blue-500" size={24} />
+          <h3 className="text-2xl font-semibold text-center">Currently Working On</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {currentProjects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="group rounded-2xl p-6 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 dark:border-blue-900"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <h3 className="text-xl font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {project.title}
+                </h3>
+                <span className="px-2 py-0.5 text-xs rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 whitespace-nowrap">
+                  {project.status}
+                </span>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <span 
+                    key={tech} 
+                    className="px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Completed Projects */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {filteredProjects.map((project, index) => (
           <motion.div

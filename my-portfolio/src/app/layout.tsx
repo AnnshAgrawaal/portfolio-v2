@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Dancing_Script } from "next/font/google";
+import { Poppins, Dancing_Script } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ['300', '400', '500', '600', '700'],
+  variable: "--font-poppins",
 });
 
 const dancingScript = Dancing_Script({
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${dancingScript.variable} font-sans antialiased`}>
+      <body className={`${poppins.variable} ${dancingScript.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
