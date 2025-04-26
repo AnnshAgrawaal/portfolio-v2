@@ -27,6 +27,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} ${dancingScript.variable} font-sans antialiased`}>
         {children}
+        <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+        <script src="https://files.bpcontent.cloud/2025/04/26/13/20250426133833-RRBBL3YX.js"></script>
       </body>
     </html>
   );
